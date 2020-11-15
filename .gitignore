@@ -1,2 +1,3 @@
 wiringPi.h
-pwm
+c_port/pwm
+c_port/*.o
