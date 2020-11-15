@@ -199,13 +199,21 @@ void pwm_start(unsigned int gpio)
         return;
 
     p->running = 1;
-    if (pthread_create(&threads, NULL, pwm_thread, (void *)p) != 0)
+    while (p->running)
     {
-        // btc fixme - error
-        p->running = 0;
-        return;
+
+        if (p->dutycycle > 0.0)
+        {
+            output_gpio(p->gpio, 1);
+            full_sleep(&p->req_on);
+        }
+
+        if (p->dutycycle < 100.0)
+        {
+            output_gpio(p->gpio, 0);
+            full_sleep(&p->req_off);
+        }
     }
-    pthread_detach(threads);
 }
 
 void pwm_stop(unsigned int gpio)

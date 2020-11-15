@@ -12,9 +12,12 @@ gpio.setup(ledPin, gpio.OUT);
 
 # gpio.output(ledPin, 0);
 
-ledPwm = gpio.PWM(ledPin, 25);
+ledPwm = gpio.PWM(ledPin, 50);
 
-# ledPwm.start(50);
+ledPwm.start(1);
+
+while True:
+    continue;
 
 # time.sleep(3);
 
